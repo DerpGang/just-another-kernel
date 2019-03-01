@@ -1376,9 +1376,7 @@ static int __device_suspend(struct device *dev, pm_message_t state, bool async)
 	 */
 	if (pm_runtime_barrier(dev) && device_may_wakeup(dev))
 		pm_wakeup_event(dev, 0);
-
 	if (pm_wakeup_pending()){
-//		log_suspend_abort_reason(suspend_abort);
 		dev->power.direct_complete = false;
 		async_error = -EBUSY;
 		goto Complete;

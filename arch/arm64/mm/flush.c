@@ -74,6 +74,7 @@ void copy_to_user_page(struct vm_area_struct *vma, struct page *page,
 void __sync_icache_dcache(pte_t pte, unsigned long addr)
 {
 	struct page *page = pte_page(pte);
+
 	/* no flushing needed for anonymous pages */
 	if (!page_mapping(page))
 		return;
