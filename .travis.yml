@@ -1,0 +1,16 @@
+language: generic
+sudo: required
+dist: xenial
+cache:
+  directories:
+     - $TRAVIS_BUILD_DIR/out
+
+script:
+  - git clone https://github.com/akhilnarang/scripts setuptools
+  - cd setuptools
+  - bash setup/android_build_env.sh
+  - cd ..
+  - sudo apt install libomp-dev --assume-yes
+  - mkdir -p $TRAVIS_BUILD_DIR/out
+  - sudo chmod +x ./telegram
+  - bash build.sh
