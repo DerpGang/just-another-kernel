@@ -59,10 +59,12 @@ function build_kernel {
 		sleep 5
 		exit
 	fi
-	
+CPU="$(grep -c '^processor' /proc/cpuinfo)"
+JOBS="$((CPU * 2))"
+
 	make O=out $DEFCONFIG
 	BUILD_START=$(date +"%s")
-	make -j8 O=out \
+	make -j${JOBS} O=out \
 		CROSS_COMPILE=$KERNEL_DIR/aarch64-raph-linux-android/bin/aarch64-raph-linux-android-
 	BUILD_END=$(date +"%s")
 	BUILD_TIME=$(date +"%Y%m%d-%T")
